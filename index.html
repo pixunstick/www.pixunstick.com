@@ -4,27 +4,63 @@
 <meta charset="utf-8">
 <title>necropx static page</title>
 <style>
-  body {
-    background-image: url(http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png);
+  html, body {
+    background-color: black;
+    cursor: none;
+    color: white;
+    font-size: 50px;
+    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
   }
 
   #pixel {
     width: 1px;
     height: 1px;
+    position: absolute;
+    left: 500px;
+    top: 500px;
+  }
+  #cross-hor {
+    background-color: white;
+    width: 500px;
+    height: 1px;
+    position: absolute;
+  }
+  #cross-ver {
+    background-color: white;
+    width: 1px;
+    height: 500px;
+    position: absolute;
   }
 </style>
 </head>
 <body>
+<div id="cross-hor"></div>
+<div id="cross-ver"></div>
 <div id="pixel"></div>
+<div id="info"></div>
 <script>
 var px = document.getElementById("pixel");
+var info = document.getElementById("info");
+var crossH = document.getElementById("cross-hor");
+var crossV = document.getElementById("cross-ver");
 var light = true;
-var subc = 'g';
-var lit = '#'+(subc=='r'?'f':'0')+(subc=='g'?'f':'0')+(subc=='b'?'f':'0');
-var off = '#'+(subc!='r'?'f':'0')+(subc!='g'?'f':'0')+(subc!='b'?'f':'0');
+var sub = 'g';
+var lit = '#'+(sub=='r'?'f':'0')+(sub=='g'?'f':'0')+(sub=='b'?'f':'0');
+var off = '#'+(sub!='r'?'f':'0')+(sub!='g'?'f':'0')+(sub!='b'?'f':'0');
+
+document.body.addEventListener('mousemove', function(evt){
+  crossH.style.left = evt.clientX-250+'px';
+  crossH.style.top = evt.clientY+'px';
+  crossV.style.left = evt.clientX+'px';
+  crossV.style.top = evt.clientY-250+'px';
+});
 
 function flipPixel(ms){
-  if (ms%100>50) {
+  if (ms%100<50) {
     px.style.mixBlendMode = 'screen';
     px.style.backgroundColor = lit;
   } else {
