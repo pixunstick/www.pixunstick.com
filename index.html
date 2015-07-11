@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>necropx static page</title>
+<style>
+  body {
+    background-image: url(http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png);
+  }
+</style>
+</head>
+<body>
+<canvas width="300" height="300" id="cvs"></canvas>
+<svg width="300" height="300" id="pxctr">
+  <filter id="fil">
+    <feBlend mode="normal" in2="BackgroundImage" in="SourceGraphic"/>
+  </filter>
+<rect x="30" y="30" height="20" width="20" fill="lime" filter="url(#fil)" />
+</svg>
+<script>
+// Get the canvas element. "cvs" is the id of the html canvas element.
+var canvas = document.getElementById("cvs");
+
+// Get the Context object.
+var context = canvas.getContext("2d");
+
+// Set the blending operation.
+context.globalCompositeOperation = "multiply";
+
+context.fillStyle="#00ff00";
+
+context.fillRect(20,20,150,100);
+</script>
+</body>
+</html>
